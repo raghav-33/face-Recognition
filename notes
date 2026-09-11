@@ -1,0 +1,51 @@
+face-id-project/
+│
+├── backend/                     # Python / FastAPI Backend
+│   ├── main.py                  # The API router (holds /register and /detect endpoints)
+│   ├── vision.py                # All AI logic (YOLO, DeepFace, and OpenCV video drawing)
+│   ├── database.py              # ChromaDB connection and vector search functions
+│   ├── requirements.txt         # pip dependencies
+│   └── uploads/                 # Temporary folder to save incoming user photos/videos
+│
+├── frontend/                    # React Frontend
+│   ├── src/
+│   │   ├── App.jsx              # Main page layout and navigation
+│   │   ├── RegisterFace.jsx     # Interface 1 (Upload photo + name)
+│   │   ├── ProcessVideo.jsx     # Interface 2 (Upload video + display processed video)
+│   │   └── App.css              # Simple styling
+│   ├── package.json             # npm dependencies
+│   └── public/                  
+│
+└── README.md                    # Setup instructions for your internship reviewers
+
+
+
+
+I use a YOLO-based face detector to locate faces, and InsightFace for face recognition by generating embeddings and comparing them with registered face embeddings."
+
+Standard YOLOv8 is trained to detect whole people, not just faces. For this to work perfectly, you need a YOLO model trained specifically on faces.
+
+Download a pre-trained YOLOv8 face weights file (usually named yolov8n-face.pt).
+
+Here DeepFace is the framework, while ArcFace is the actual face-recognition model we're using.
+
+how  **face detection is different from normal YOLO object detection**   
+1. Normal YOLO object detection
+A standard YOLO model such as yolo11n.pt is trained to recognize many common objects.
+It can detect classes such as:
+
+person
+car
+bicycle
+dog
+cat
+bus
+bottle
+laptop
+etc.
+But it is detecting the whole person, not specifically identifying the person's face.
+
+
+f we used standard YOLO: It would detect a "Person" and draw a giant box around their entire body. If you feed a picture of a whole body into DeepFace, DeepFace gets confused, tries to find the eyes/nose in the person's shirt, and the math fails.
+
+Why we used YOLO-Face: This specific model was fine-tuned exclusively on a dataset of human faces (like the WIDER FACE dataset). It ignores bodies and draws a tight, perfect box exactly around the face. This tight crop is exactly what DeepFace needs to calculate a highly accurate mathematical embedding.
