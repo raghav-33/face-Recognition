@@ -8,8 +8,6 @@ ultralytics
 deepface
 opencv-python
 
-# Vector Database
-chromadb
 
 # Utility (Often required by DeepFace/OpenCV under the hood)
 numpy
