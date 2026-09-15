@@ -13,7 +13,7 @@ except Exception as e:
 streaming_active = False
 
 def stop_stream():
-    """A kill-switch to instantly release the webcam hardware."""
+    """A Function to instantly release the webcam."""
     global streaming_active
     streaming_active = False
 
