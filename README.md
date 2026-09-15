@@ -8,7 +8,6 @@ Identity Vision AI is a full-stack real-time face detection, recognition, and id
 
 - **Real-Time Detection:** Fast face bounding box generation using YOLOv8.
 - **Accurate Recognition:** High-accuracy facial feature representation using ArcFace.
-- **Low-Latency Streaming:** Uses MJPEG video streaming (`multipart/x-mixed-replace`) instead of writing video files to disk.
 - **Hardware Management:** Includes a dedicated endpoint to cleanly start and stop camera hardware access.
 - **Modern Interface:** Dual-tab React UI supporting live camera scanning and identity registration.
 
@@ -20,7 +19,6 @@ Identity Vision AI is a full-stack real-time face detection, recognition, and id
 - **Backend:** Python 3.10+, FastAPI, Uvicorn, OpenCV (`cv2`).
 - **AI / Computer Vision:** Ultralytics YOLOv8, DeepFace (ArcFace backend), NumPy.
 - **Storage:** SQLite (vector store and relational user metadata).
-- **Deployment:** Vercel (Frontend SPA) + LocalTunnel / Ngrok / Cloud VM (Backend API).
 
 ---
 
@@ -71,7 +69,7 @@ Install dependencies and start the FastAPI server:
 
 ```bash
 pip install -r requirements.txt
-python main.py
+uvicorn main:app --reload
 ```
 
 > If `requirements.txt` is not available, install dependencies manually:
@@ -107,7 +105,3 @@ The frontend will run at: `http://localhost:5173`
 | `GET` | `/stop_camera` | Stops the camera capture loop. |
 
 ---
-
-## 📄 License
-
-This project is provided as-is for educational and development purposes. Add your preferred license here.
